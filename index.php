@@ -16,6 +16,8 @@
     <form action="" method="get">
       <input type="checkbox" name="parking_available" id="parking_available" <?php if (!empty($_GET["parking_available"])) echo "checked" ?>>
       <label for="parking_available">Parking available ONLY</label>
+      <label for="vote">Minimum vote:</label>
+      <input type="number" name="vote" id="vote" placeholder="e.g. 1 to 5" min="1" max="5" value=<?php if (!empty($_GET["vote"])) echo $_GET["vote"] ?>>
       <button type="submit">Confirm</button>
     </form>
 
@@ -82,8 +84,10 @@
       <tbody>
         <?php
         foreach ($hotels as $hotel) {
-          $filterActive = !empty($_GET["parking_available"]);
-          if (!$filterActive || $hotel['parking']) {
+          $filterParking = empty($_GET["parking_available"]) || $hotel['parking'];
+          $filterVote = empty($_GET["vote"]) || $hotel['vote'] >= $_GET["vote"];
+
+          if ($filterParking && $filterVote) {
             $parkingText = $hotel['parking'] ? "Disponibile" : "Non disponibile";
             echo "<tr>";
             echo "<td>{$hotel['name']}</td>";
