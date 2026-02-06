@@ -13,12 +13,22 @@
 
     <h1>EX - PHP Hotel</h1>
 
-    <form action="" method="get">
-      <input type="checkbox" name="parking_available" id="parking_available" <?php if (!empty($_GET["parking_available"])) echo "checked" ?>>
-      <label for="parking_available">Parking available ONLY</label>
-      <label for="vote">Minimum vote:</label>
-      <input type="number" name="vote" id="vote" placeholder="e.g. 1 to 5" min="1" max="5" value=<?php if (!empty($_GET["vote"])) echo $_GET["vote"] ?>>
-      <button type="submit">Confirm</button>
+    <form action="" method="get" class="border rounded p-4 shadow-sm mb-5" style="width: 350px;">
+      <h6 class="mb-3">Filter by:</h6>
+
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" role="switch" name="parking_available" id="parking_available" <?php if (!empty($_GET["parking_available"])) echo "checked" ?>>
+        <label class="form-check-label" for="parking_available">
+          Parking available ONLY
+        </label>
+      </div>
+
+      <div class="mb-3">
+        <label for="vote" class="form-label small fw-bold">Minimum vote:</label>
+        <input class="form-control" type="number" name="vote" id="vote" placeholder="e.g. 1 to 5" min="1" max="5" value=<?php if (!empty($_GET["vote"])) echo $_GET["vote"] ?>>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Confirm</button>
     </form>
 
     <?php
