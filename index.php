@@ -14,7 +14,7 @@
     <h1>EX - PHP Hotel</h1>
 
     <form action="" method="get">
-      <input type="checkbox" name="parking_available" id="parking_available">
+      <input type="checkbox" name="parking_available" id="parking_available" <?php if (!empty($_GET["parking_available"])) echo "checked" ?>>
       <label for="parking_available">Parking available ONLY</label>
       <button type="submit">Confirm</button>
     </form>
