@@ -13,6 +13,12 @@
 
     <h1>EX - PHP Hotel</h1>
 
+    <form action="" method="get">
+      <input type="checkbox" name="parking_available" id="parking_available">
+      <label for="parking_available">Parking available ONLY</label>
+      <button type="submit">Confirm</button>
+    </form>
+
     <?php
     $hotels = [
       [
@@ -76,14 +82,17 @@
       <tbody>
         <?php
         foreach ($hotels as $hotel) {
-          $parkingText = $hotel['parking'] ? "Disponibile" : "Non disponibile";
-          echo "<tr>";
-          echo "<td>{$hotel['name']}</td>";
-          echo "<td>{$hotel['description']}</td>";
-          echo "<td>{$parkingText}</td>";
-          echo "<td>{$hotel['vote']} / 5</td>";
-          echo "<td>{$hotel['distance_to_center']} km</td>";
-          echo "</tr>";
+          $filterActive = !empty($_GET["parking_available"]);
+          if (!$filterActive || $hotel['parking']) {
+            $parkingText = $hotel['parking'] ? "Disponibile" : "Non disponibile";
+            echo "<tr>";
+            echo "<td>{$hotel['name']}</td>";
+            echo "<td>{$hotel['description']}</td>";
+            echo "<td>{$parkingText}</td>";
+            echo "<td>{$hotel['vote']} / 5</td>";
+            echo "<td>{$hotel['distance_to_center']} km</td>";
+            echo "</tr>";
+          }
         }
         ?>
       </tbody>
